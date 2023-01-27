@@ -1,0 +1,55 @@
+{% extends 'base.html'%}
+
+{% load static%}
+
+    <!-- Main Content -->
+{% block container_block %}
+
+
+
+<header class="masthead text-center text-white">
+   
+ <!-- On rows -->
+<div class="table-responsive">
+
+<table class="table table-hover">
+  <thead>
+    <tr class="table-primary">
+      <th scope="col">ID.</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Subject</th>
+    <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <h1> List of Teachers </h1>
+   <nav class="navbar navbar-light bg-light">
+  <form class="example"  method="GET" action="" >
+          <input type="text" placeholder="Search.." name="q" value="{{request.GET.q}}" >
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+</nav>
+  {% for teacher in t_list %}
+     
+    <tr class="table-primary">
+      <th scope="row">{{teacher.id}}</th>
+      <td>{{teacher.first_name}}</td>
+      <td>{{teacher.last_name}}</td>
+      <td>{{teacher.mobile_number}}</td>
+      <td>{{teacher.subject_taught}}</td>
+      <td><a href="{% url 'teacher:details'  pk=teacher.id %}"> <button type="button" class="btn btn-info">Teacher Info</button> </a> </td>
+    </tr>
+
+    {% endfor %}
+    
+   
+  </tbody>
+</table>
+</div>
+{%include 'pagination.html' with page=t_list %} 
+  </header>
+
+
+{% endblock %}
